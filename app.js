@@ -1,7 +1,7 @@
 //info&news tabs
 
 (function () {
-    $("#tab1").hide();
+    // $("#tab1").hide();
     $("#tab2").hide();
 })();
 
@@ -23,6 +23,22 @@ console.log(showTab1);
 
 //validation list:
 
+const renderStocks = function () {
+
+    $('.history').empty();
+
+    for (let i = 0; i < stocks.length; i++) {
+        
+        const newButton = $('<h3>');
+        newButton.addClass('stockBtn');
+
+        newButton.attr('data-name', stocks[i]);
+        newButton.text(stocks[i]);
+
+        $('.history').append(newButton);
+
+    }
+
 let validationList;
 
 const createValidation = function () {
@@ -30,7 +46,7 @@ const createValidation = function () {
         url: `https://api.iextrading.com/1.0/ref-data/symbols`,
         method: 'GET'
     }).then(function (response) {
-        validationList = response.symbol;
+        validationList[i] = response.symbol;
 
         pushButtons();
  
@@ -38,6 +54,25 @@ const createValidation = function () {
  
  };
 
+
+ 
+}
+
+const pushButtons = function (validationList) {
+    $(".searchBtn").on('click', function () {
+ 
+        let input = $('.search').val().toUpperCase();
+ 
+        for (let i = 0; i < validationList.length; i++) {
+            if (input === validationList[i].symbol) {
+                stocks.push(input)
+ 
+                renderStocks();
+            }
+        }
+    })
+ 
+ };
  
 
 
@@ -89,38 +124,7 @@ const displayStockInfo = function () {
 
 
 
-    const renderStocks = function () {
-
-        $('.history').empty();
-
-        for (let i = 0; i < stocks.length; i++) {
-            
-            const newButton = $('<h3>');
-            newButton.addClass('stockBtn');
-
-            newButton.attr('data-name', stocks[i]);
-            newButton.text(stocks[i]);
-
-            $('.history').append(newButton);
-
-        }
-    }
-
-    const pushButtons = function (validationList) {
-        $(".searchBtn").on('click', function () {
-     
-            let input = $('.search').val().toUpperCase();
-     
-            for (let i = 0; i < validationList.length; i++) {
-                if (input === validationList[i].symbol) {
-                    stocks.push(input)
-     
-                    renderStocks();
-                }
-            }
-        })
-     
-     };
+    
 
     const addButton = function(e) {
         e.preventDefault();
@@ -129,6 +133,7 @@ const displayStockInfo = function () {
 
         $('.search').val('');
 
+        
         renderStocks();
     }
 
