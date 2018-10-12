@@ -1,0 +1,246 @@
+html {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+/*nav bar*/
+
+div.scrollmenu {
+    background-color: #333;
+    overflow: auto;
+    white-space: nowrap;
+}
+
+div.scrollmenu a {
+    display: inline-block;
+    color: white;
+    text-align: right;
+    padding: 14px;
+    text-decoration: none;
+    float: right;
+}
+
+div.scrollmenu a:hover {
+    background-color: #777;
+}
+
+/*3 column page layout*/
+
+.row {
+    width: 100%;
+	margin: 0 auto;
+    overflow: hidden;
+    max-width: 1140px;
+    min-width: 748px;
+    display: flex;
+}
+
+
+/* Clear floats after the columns */
+
+.column {
+    background-color: rgba(1, 12, 60, 0.16);
+}
+
+.left, .right {
+    height: 50%;
+    height: 500px;
+}
+
+.left {
+    margin: 10px 0 0 0;
+    flex: 1;
+}
+
+.right {
+    margin: 10px 0 0 0;
+    flex: 1;
+}
+
+.middle {
+    flex: 2;
+    margin: 10px 10px 0 10px;
+    text-align: center;
+}
+
+.favorites {
+    height: 500px;
+    flex: 1;
+    /* border:1px solid rgba(255, 110, 110, 0.249); */
+    font:16px/26px;
+    overflow:auto;
+}
+
+.favorites h3 {
+    text-align: center;
+    background-color: #A2D9CE;
+    width: 100%;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.favorites h3:hover {
+    background-color: #a7cce5;
+}
+
+.history {
+    height: 500px;
+    flex: 1;
+    /* border:1px solid rgba(255, 110, 110, 0.249); */
+    font:16px/26px;
+    overflow:auto;
+}
+
+.history h3 {
+    text-align: center;
+    background-color: #A2D9CE;
+    width: 100%;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.history h3:hover {
+    background-color: #a7cce5;
+}
+
+.left h2 {
+    text-align: left;
+    font-style: italic;
+    margin-left: 10px;
+}
+
+.right h2 {
+    text-align: right;
+    font-style: italic;
+    margin-right: 10px;
+}
+
+.searchBar {
+    position: relative;
+    margin-top: 24px;
+}
+
+.searchBar .search {
+    width: 250px;
+    height: 20px;
+    border-radius: 10px;
+    font-style: italic;
+    
+}
+
+.searchBar i {
+    /* position: absolute; */
+    position: top right;
+    z-index: 2;
+    cursor: pointer;
+    right: 155px;
+    color: white;
+}
+
+.searchBar button {
+    top: -1px;
+    position: absolute;
+    border-radius: 20px;
+    background-color: #333;
+    text-decoration: none;
+}
+
+.searchBar button:hover {
+    background-color: #777;
+}
+
+
+/* main content */
+
+/*----- Tabs -----*/
+.tabs {
+	width:100%;
+	/* display:inline-block; */
+}
+
+/*----- Tab Links -----*/
+/* Clearfix */
+	.tab-links:after {
+	display:block;
+	clear:both;
+	content:'';
+}
+
+.tab-links li {
+	margin:0px 5px;
+	float:left;
+    list-style:none;
+    background: #A2D9CE;
+    border-radius:3px 3px 0px 0px;
+    padding:9px 15px;
+    color:#4c4c4c;
+    font-weight:600;
+    font-size:16px;
+    cursor: pointer;
+}
+
+.tab-links li:active {
+    background-color: #fff;
+}
+
+.tab-links a {
+	padding:9px 15px;
+	/* display:inline-block; */
+	border-radius:3px 3px 0px 0px;
+	background:#A2D9CE;
+	font-size:16px;
+	font-weight:600;
+	color:#4c4c4c;
+	transition:all linear 0.15s;
+}
+
+.tab-links a:hover {
+	background:#a7cce5;
+	text-decoration:none;
+}
+
+li.active, li.active:hover {
+	background:#fff;
+	color:#4c4c4c;
+}
+
+/*----- Content of Tabs -----*/
+.tab-content {
+    padding: 15px;
+    height: 300px;
+	
+	/* box-shadow:-1px 1px 1px rgba(0,0,0,0.15); */
+    background:#fff;
+    text-align: left;
+    /* border:1px solid rgba(255, 110, 110, 0.249); */
+    font:16px/26px;
+    overflow:auto;
+}
+
+.tab {
+	display:none;
+}
+
+.tab.active {
+	display:block;
+}
+
+.retrieve {
+    border-radius: 3px;
+}
+
+.stock {
+    background: lavender;
+}
+
+.newsDiv {
+    border: solid;
+}
+
+/* responsivness */
+
+@media screen and (max-width: 600px) {
+    .column {
+        width: 100%;
+    }
+}
+

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Stock Craze </title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <header>
+        <div class="scrollmenu">
+            <a href="#help.html">Help</a>
+            <a href="index.html">Home</a>
+    </header>
+
+    <main>
+
+        <div class="row">
+            <div class="column left">
+
+                    <h2><i class="material-icons">stars</i>Favorites</h2>
+
+                <div class="favorites">
+                    
+                    <h3>TSLA</h3>
+                </div>
+
+            </div>
+            <div class="column middle">
+
+                <div class="searchBar">
+                    <input class="search" type="text" placeholder="type in any stock symbol">
+                    <button class="searchBtn"><i class="material-icons">search</i></button>
+                </div>
+
+                <div class="info">
+
+                        <div class="tabs">
+                                <ul class="tab-links">
+                                    <li id="info" class="active">Info</li>
+                                    <li id="news">News</li>
+                                    <select class="retrieve">
+                                            <option value="">(Select # of News Articles)</option>
+                                            <option value="1">1</option>
+                                            <option value="5">5</option>
+                                            <option value="10">10</option>
+                                        </select>
+            
+                                </ul>
+                            
+                                <div class="tab-content">
+                                    <div id="tab1" class="tab active">
+                                       
+                                    </div>
+                            
+                                    <div id="tab2" class="tab">
+                                            <h5>test</h5>
+                                    </div>
+                                </div>
+                            </div>
+
+                </div>
+                
+            </div>
+            <div class="column right">
+
+                <h2>History<i class="material-icons">query_builder</i></h2>
+
+                <div class="history">
+                    <h3>MSFT</h3>
+
+                </div>
+
+            </div>
+          </div>
+
+    </main>
+
+</body>
+
+
+<script src="dom.js"></script>
+<script src="app.js"></script>
+</html>
