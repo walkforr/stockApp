@@ -33,12 +33,14 @@ const renderStocks = function() {
     newButton.attr("data-name", stocks[i]);
     newButton.text(stocks[i]);
 
+    stockValidation();
     $(".history").append(newButton);
   }
+};
 
   let validationList;
 
-  const createValidation = function() {
+  const stockValidation = function() {
     $.ajax({
       url: `https://api.iextrading.com/1.0/ref-data/symbols`,
       method: "GET"
@@ -48,7 +50,7 @@ const renderStocks = function() {
       pushButtons();
     });
   };
-};
+
 
 const pushButtons = function(validationList) {
   $(".searchBtn").on("click", function() {
