@@ -1,19 +1,19 @@
 //info&news tabs
 
-(function () {
-    // $("#tab1").hide();
-    $("#tab2").hide();
+(function() {
+  // $("#tab1").hide();
+  $("#tab2").hide();
 })();
 
-const showTab1 = function () {
-	$("#tab1").show();
-	$("#tab2").hide();
-}
+const showTab1 = function() {
+  $("#tab1").show();
+  $("#tab2").hide();
+};
 
-const showTab2 = function () {
-	$("#tab1").hide();
-	$("#tab2").show();
-}
+const showTab2 = function() {
+  $("#tab1").hide();
+  $("#tab2").show();
+};
 
 $("#info").on("click", showTab1);
 $("#news").on("click", showTab2);
@@ -23,121 +23,109 @@ console.log(showTab1);
 
 //validation list:
 
-const renderStocks = function () {
+const renderStocks = function() {
+  $(".history").empty();
 
-    $('.history').empty();
+  for (let i = 0; i < stocks.length; i++) {
+    const newButton = $("<h3>");
+    newButton.addClass("stockBtn");
 
-    for (let i = 0; i < stocks.length; i++) {
-        
-        const newButton = $('<h3>');
-        newButton.addClass('stockBtn');
+    newButton.attr("data-name", stocks[i]);
+    newButton.text(stocks[i]);
 
-        newButton.attr('data-name', stocks[i]);
-        newButton.text(stocks[i]);
+    $(".history").append(newButton);
+  }
 
-        $('.history').append(newButton);
+  let validationList;
 
-    }
-
-let validationList;
-
-const createValidation = function () {
+  const createValidation = function() {
     $.ajax({
-        url: `https://api.iextrading.com/1.0/ref-data/symbols`,
-        method: 'GET'
-    }).then(function (response) {
-        validationList[i] = response.symbol;
+      url: `https://api.iextrading.com/1.0/ref-data/symbols`,
+      method: "GET"
+    }).then(function(response) {
+      validationList[i] = response.symbol;
 
-        pushButtons();
- 
+      pushButtons();
     });
- 
- };
+  };
+};
 
+const pushButtons = function(validationList) {
+  $(".searchBtn").on("click", function() {
+    let input = $(".search")
+      .val()
+      .toUpperCase();
 
- 
-}
+    for (let i = 0; i < validationList.length; i++) {
+      if (input === validationList[i].symbol) {
+        stocks.push(input);
 
-const pushButtons = function (validationList) {
-    $(".searchBtn").on('click', function () {
- 
-        let input = $('.search').val().toUpperCase();
- 
-        for (let i = 0; i < validationList.length; i++) {
-            if (input === validationList[i].symbol) {
-                stocks.push(input)
- 
-                renderStocks();
-            }
-        }
-    })
- 
- };
- 
-
+        renderStocks();
+      }
+    }
+  });
+};
 
 //stocks
 
-const stocks = [ "AAPL", "TSLA", "NKE", "FB", "GOOG" ];
+const stocks = ["AAPL", "TSLA", "NKE", "FB", "GOOG"];
 
-const displayStockInfo = function () {
-    const stock = $(this).attr("data-name");
-    const queryURL = `https://api.iextrading.com/1.0/stock/${stock}/batch?types=quote,news&range=1m&last=1`;
+const displayStockInfo = function() {
+  const stock = $(this).attr("data-name");
+  const queryURL = `https://api.iextrading.com/1.0/stock/${stock}/batch?types=quote,news&range=1m&last=1`;
 
-    $.ajax({
-        url: queryURL,
-        method: 'GET'
-    }).then(function(response) {
-        const stockDiv = $('<div>').addClass('stock');
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).then(function(response) {
+    const stockDiv = $("<div>").addClass("stock");
 
-        const companyName = response.quote.companyName;
-        const nameHolder = $('<p>').text(`Company Name: ${companyName}`);
-        stockDiv.append(nameHolder);
+    const companyName = response.quote.companyName;
+    const nameHolder = $("<p>").text(`${companyName}`);
+    stockDiv.append(nameHolder);
 
-        const stockSymbol = response.quote.symbol;
-        const symbolHolder = $('<p>').text(`Stock Symbol: ${stockSymbol}`);
-        stockDiv.append(symbolHolder);
+    const stockSymbol = response.quote.symbol;
+    const symbolHolder = $("<p>").text(`${stockSymbol}`);
+    stockDiv.append(symbolHolder);
 
-        const stockPrice = response.quote.latestPrice;
-        const priceHolder = $('<p>').text(`Stock Price: ${stockPrice}`);
-        stockDiv.append(priceHolder);
-        
-        $('#tab1').html(stockDiv);
+    const stockPrice = response.quote.latestPrice;
+    const priceHolder = $("<p>").text(`Stock Price: ${stockPrice}`);
+    stockDiv.append(priceHolder);
 
-        //news
+    // const stockLogo = response.quote.symbol.logo;
+    // const logoHolder = $('<p>').text(`logo: ${stockLogo}`);
+    // // stockDiv.append(logoHolder);
+    // console.log(stackLogo);
+    //having a problem fetching the logo.. I'm having a having trouble figuring out
 
-        const newsDiv = $('<div class="newsDiv">');
-       for(let i=0; i<response.news.length; i++){
-           newsBin.append(`<p>${response.news[i].summary}</p>`)
-       }
+    $("#tab1").html(stockDiv);
 
-        $('#tab2').html(newsDiv);
+    //news
 
-
-    });
-
-}
-
-
-
-    //display stock history + add
-
-
-
-    
-
-    const addButton = function(e) {
-        e.preventDefault();
-        const stock = $('.search').val().trim();
-        stocks.push(stock);
-
-        $('.search').val('');
-
-        
-        renderStocks();
+    const newsDiv = $('<div class="newsDiv">');
+    for (let i = 0; i < response.news.length; i++) {
+      newsDiv.append(`<p>${response.news[i].summary}</p>`);
     }
 
-    $('.searchBtn').on('click', addButton);
-    $('.history').on('click', '.stockBtn', displayStockInfo);
+    $("#tab2").html(newsDiv);
+  });
+};
 
-    renderStocks();
+//display stock history + add
+
+const addButton = function(e) {
+  e.preventDefault();
+  const stock = $(".search")
+    .val()
+    .trim();
+  stocks.push(stock);
+
+  $(".search").val("");
+
+  renderStocks();
+};
+
+$(".searchBtn").on("click", addButton);
+$(".history").on("click", ".stockBtn", displayStockInfo);
+
+renderStocks();
