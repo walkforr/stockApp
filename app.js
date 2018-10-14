@@ -34,7 +34,23 @@ const renderStocks = function() {
     newButton.text(stocks[i]);
 
     stockValidation();
+    pushButtons();
     $(".history").append(newButton);
+  }
+};
+const renderFavorites = function() {
+  $(".favorites").empty();
+
+  for (let i = 0; i < stocks.length; i++) {
+    const newButton = $("<h3>");
+    newButton.addClass("stockBtn");
+
+    newButton.attr("data-name", stocks[i]);
+    newButton.text(stocks[i]);
+
+    stockValidation();
+    pushButtons();
+    $(".favorites").append(newButton);
   }
 };
 
@@ -105,6 +121,9 @@ const displayStockInfo = function() {
     const capHolder = $("<p>").text(`Market Cap: ${cap}`);
     stockDiv.append(capHolder);
 
+    const addToFavs = $('<button class="favs">').text('Add to Favorites');
+    stockDiv.append(addToFavs);
+
     // const stockLogo = response.quote.symbol.logo;
     // const logoHolder = $('<p>').text(`logo: ${stockLogo}`);
     // // stockDiv.append(logoHolder);
@@ -124,22 +143,41 @@ const displayStockInfo = function() {
   });
 };
 
+//add to favorites
+
 
 //display stock history + add
 
 const addButton = function(e) {
   e.preventDefault();
-  const stock = $(".search")
+  const stockButton = $(".search")
     .val()
     .trim();
-  stocks.push(stock);
+  stocks.push(stockButton);
 
   $(".search").val("");
 
   renderStocks();
 };
 
+
+
+const addFavBtn = function(e) {
+  e.preventDefault();
+  const stockButton2 = $(".search")
+    .val()
+    .trim();
+  stocks.push(stockButton2);
+
+  $(".search").val("");
+    renderFavorites();
+    console.log(addFavBtn);
+};
+
+
 $(".searchBtn").on("click", addButton);
 $(".history").on("click", ".stockBtn", displayStockInfo);
+$(".favorites").on("click", ".stockBtn", displayStockInfo);
+$(".favs").on("click", addFavBtn);
 
 renderStocks();

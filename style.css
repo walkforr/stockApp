@@ -2,6 +2,11 @@ html {
     font-family: 'Ubuntu', sans-serif;
 }
 
+h2 {
+    color: #fff;
+    margin-left: 20px;
+}
+
 /*nav bar*/
 
 div.scrollmenu {
