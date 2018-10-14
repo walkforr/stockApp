@@ -152,7 +152,7 @@ const addButton = function(e) {
   e.preventDefault();
   const stockButton = $(".search")
     .val()
-    .trim();
+    .trim().toUpperCase();
   stocks.push(stockButton);
 
   $(".search").val("");
