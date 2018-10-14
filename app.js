@@ -99,7 +99,7 @@ const displayStockInfo = function() {
 
     const low = response.quote.low;
     const lowHolder = $("<p>").text(`Low: ${low}`);
-    stockDiv.append(highHolder);
+    stockDiv.append(lowHolder);
 
     const cap = response.quote.marketCap;
     const capHolder = $("<p>").text(`Market Cap: ${cap}`);
