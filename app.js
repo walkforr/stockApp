@@ -45,18 +45,17 @@ const renderStocks = function() {
       url: `https://api.iextrading.com/1.0/ref-data/symbols`,
       method: "GET"
     }).then(function(response) {
-      validationList[i] = response.symbol;
+      validationList = response.symbol;
 
       pushButtons();
+      console.log(validationList);
     });
   };
 
 
 const pushButtons = function(validationList) {
   $(".searchBtn").on("click", function() {
-    let input = $(".search")
-      .val()
-      .toUpperCase();
+    let input = $(".search").val().toUpperCase();
 
     for (let i = 0; i < validationList.length; i++) {
       if (input === validationList[i].symbol) {
@@ -74,7 +73,7 @@ const stocks = ["AAPL", "TSLA", "NKE", "FB", "GOOG"];
 
 const displayStockInfo = function() {
   const stock = $(this).attr("data-name");
-  const queryURL = `https://api.iextrading.com/1.0/stock/${stock}/batch?types=quote,news&range=1m&last=1`;
+  const queryURL = `https://api.iextrading.com/1.0/stock/${stock}/batch?types=quote,news,chart&range=1m&last=10`;
 
   $.ajax({
     url: queryURL,
@@ -94,6 +93,18 @@ const displayStockInfo = function() {
     const priceHolder = $("<p>").text(`Stock Price: ${stockPrice}`);
     stockDiv.append(priceHolder);
 
+    const high = response.quote.high;
+    const highHolder = $("<p>").text(`High: ${high}`);
+    stockDiv.append(highHolder);
+
+    const low = response.quote.low;
+    const lowHolder = $("<p>").text(`Low: ${low}`);
+    stockDiv.append(highHolder);
+
+    const cap = response.quote.marketCap;
+    const capHolder = $("<p>").text(`Market Cap: ${cap}`);
+    stockDiv.append(capHolder);
+
     // const stockLogo = response.quote.symbol.logo;
     // const logoHolder = $('<p>').text(`logo: ${stockLogo}`);
     // // stockDiv.append(logoHolder);
@@ -112,6 +123,7 @@ const displayStockInfo = function() {
     $("#tab2").html(newsDiv);
   });
 };
+
 
 //display stock history + add
 
