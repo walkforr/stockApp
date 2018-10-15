@@ -54,14 +54,13 @@ const renderFavorites = function() {
   }
 };
 
-  let validationList;
 
   const stockValidation = function() {
     $.ajax({
       url: `https://api.iextrading.com/1.0/ref-data/symbols`,
       method: "GET"
     }).then(function(response) {
-      validationList = response.symbol;
+      const validationList = response.symbol;
 
       pushButtons();
       console.log(validationList);
@@ -75,9 +74,11 @@ const pushButtons = function(validationList) {
 
     for (let i = 0; i < validationList.length; i++) {
       if (input === validationList[i].symbol) {
-        stocks.push(input);
+        stocks.push(input)
 
         renderStocks();
+      }else{ 
+        return false;
       }
     }
   });
